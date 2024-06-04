@@ -126,3 +126,24 @@ p {
   max-height: 400px; /* Set a max height for the result panel */
   overflow-y: auto; /* Enable vertical scrolling if content is too long */
 }
+
+h1 {
+  font-size: 3em;
+  animation: pulse 2s ease-in-out infinite; /* 无限持续的渐入渐出动画效果 */
+  color: #00ffff; /* 青色 */
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}

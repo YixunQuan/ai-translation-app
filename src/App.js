@@ -3,28 +3,35 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import './App.css';
 import { SocialIcon } from 'react-social-icons'
 
-const API_KEY = 'AIzaSyAALIp6OCqzTjF2es3jYElvqXfe_lf9GOc'; // Replace with your Google API key
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 const App = () => {
   const [inputText, setInputText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
-  const [targetLanguage, setTargetLanguage] = useState('en'); // Default translation to English
+  const [targetLanguage, setTargetLanguage] = useState('en'); 
   const [typingText, setTypingText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // New state for loading
+  const [isLoading, setIsLoading] = useState(false); 
 
   const translateText = async () => {
-    setIsLoading(true); // Set loading to true before translation
-    setTypingText(''); // Clear previous result before translation
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const prompt = `Translate "${inputText}" to ${targetLanguage}`;
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const translatedText = await response.text();
-    setTranslatedText(translatedText);
-    setIsTyping(true);
+    try {
+      setIsLoading(true); 
+      setTypingText(''); 
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const prompt = `Translate "${inputText}" to ${targetLanguage}`;
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const translatedText = await response.text();
+      setTranslatedText(translatedText);
+      setIsTyping(true);
+    } catch (error) {
+      console.error("GoogleGenerativeAI Error:", error);
+      alert("Sorry, the token has been exhausted. Please try again after 1 minute.");
+    } finally {
+      setIsLoading(false); 
+    }
   };
 
   useEffect(() => {
@@ -36,7 +43,7 @@ const App = () => {
         if (currentIndex === translatedText.length) {
           clearInterval(intervalId);
           setIsTyping(false);
-          setIsLoading(false); // Reset loading after typing is done
+          setIsLoading(false); 
         }
       }, 5);
       return () => clearInterval(intervalId);
@@ -52,14 +59,14 @@ const App = () => {
   };
 
   const handleTranslate = () => {
-    if (!isLoading) { // Only translate if not already loading
+    if (!isLoading) {
       translateText();
     }
   };
 
   return (
     <div className="App">
-      <h1>AI Translation </h1>
+      <h1>AI Translate </h1>
       <div className="container">
         <div className="translation-panel">
           <textarea
@@ -92,8 +99,8 @@ const App = () => {
       <div className="footer">
         <p>Created by Yixun, language model power by Google AI</p>
         <div className="social-links">
-        <SocialIcon href="https://github.com/YixunQuan" url="www.github.com"></SocialIcon>
-        <SocialIcon href="https://www.linkedin.com/in/yixun-quan-929a661a3/" url='www.linkedin.com'></SocialIcon>
+          <SocialIcon href="https://github.com/YixunQuan" url="www.github.com" />
+          <SocialIcon href="https://www.linkedin.com/in/yixun-quan-929a661a3/" url="www.linkedin.com" />
         </div>
       </div>
     </div>
