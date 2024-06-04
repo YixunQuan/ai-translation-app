@@ -1,38 +1,128 @@
-.App {
+/* General styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Set a more modern default font family */
+  background: linear-gradient(135deg, #1f1c2c, #928dab); /* Gradient background */
+  color: #fff; /* White text color */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+h1 {
   text-align: center;
+  color: #fff; /* White text */
+  margin-bottom: 20px;
+  font-size: 2em; /* Increase font size for more emphasis */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Text input area */
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: vertical; /* Allow vertical resizing only */
+  background-color: #2a2a2a; /* Dark background */
+  color: #fff; /* White text */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Add inner shadow for depth */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Select element */
+select {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #2a2a2a; /* Dark background */
+  color: #fff; /* White text */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Translate button */
+button {
+  background-color: #0095ff; /* Blue button */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; /* Change cursor to pointer on hover */
+  margin-top: 10px;
+  transition: background-color 0.3s; /* Smooth transition */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+button:hover {
+  background-color: #007bff; /* Darken blue on hover */
+}
+
+/* Translation result */
+h2 {
+  margin-top: 20px;
+  color: #fff; /* White text */
+  font-size: 1.5em; /* Increase font size for more emphasis */
+}
+
+p {
+  font-size: 18px;
+  color: #fff; /* White text */
+}
+
+/* App container */
+.App {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 80%;
+  margin: 0 auto; /* Center the app horizontally */
+  padding-bottom: 80px; /* Add bottom padding to prevent content overlap with footer */
 }
 
-.App-link {
-  color: #61dafb;
+/* Footer */
+.footer {
+  position: fixed; /* Fixed position */
+  bottom: 0; /* Stick to the bottom of the page */
+  left: 0; /* Span the entire width */
+  width: 100%;
+  padding: 20px;
+  background-color: #2a2a2a; /* Dark background */
+  text-align: center;
+  color: #fff; /* White text */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Container for translation and result panels */
+.container {
+  display: flex;
+  justify-content: space-between; /* Distribute space between panels */
+  gap: 20px; /* Add spacing between panels */
+  width: 100%;
+}
+
+.translation-panel, .result-panel {
+  width: 45%; /* Adjust width as needed */
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur effect for background */
+  color: #fff; /* White text */
+  overflow-y: auto;
+}
+
+.translation-panel textarea {
+  width: 100%; /* Take full width of the parent */
+  height: 200px; /* Adjust height as needed */
+  box-sizing: border-box; /* Include padding and border in width/height */
+  resize: vertical; /* Allow vertical resizing only */
+  overflow-y: auto;
+  background-color: #2a2a2a; /* Dark background */
+  color: #fff; /* White text */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Add inner shadow for depth */
+}
+
+.result-panel {
+  max-height: 400px; /* Set a max height for the result panel */
+  overflow-y: auto; /* Enable vertical scrolling if content is too long */
 }
